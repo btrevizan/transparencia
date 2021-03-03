@@ -1,5 +1,4 @@
 from src.etl import ETL
-from time import sleep
 import itertools
 import fire
 
@@ -10,12 +9,13 @@ class Main:
     MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
     SOURCES = ['cpgf', 'cpcc', 'despesas-execucao', 'licitacoes', 'compras', 'viagens']
 
-    def extract(self, source: str = 'all'):
+    def extract(self, source: str = 'all', replace: bool = False):
         """
         Extract 2015-2020 files from a specified source.
 
         :param source: (str, default 'all') When all, extract files from all sources.
         Possible values: cpgf, cpcc, despesas-execucao, licitacoes, compras, viagens (a)
+        :param replace: (bool, default False) Whether to replace the existing files.
         """
         sources = [source] if source != 'all' else self.SOURCES
 
@@ -26,8 +26,7 @@ class Main:
                 series = itertools.product(self.YEARS, [''])
 
             for year, month in series:
-                ETL.extract(source, year, month)
-                sleep(1)
+                ETL.extract(source, year, month, replace)
 
 
 if __name__ == '__main__':

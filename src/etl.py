@@ -1,3 +1,4 @@
+from time import sleep
 from tqdm import tqdm
 import requests
 import os
@@ -5,21 +6,28 @@ import os
 
 class ETL:
 
-    @staticmethod
-    def extract(source, year, month):
+    @classmethod
+    def extract(cls, source: str, year: int, month: str, replace: bool = False):
         datapath = f'data/raw/{source}'
         datafile = f'{datapath}/{year}{month}.zip'
 
-        if os.path.isfile(datafile):
+        if not replace and os.path.isfile(datafile):
             return
 
         url = f'http://www.portaltransparencia.gov.br/download-de-dados/{source}/{year}{month}'
         print(url)
 
-        response = requests.get(url, stream=True)
+        try:
+            response = requests.get(url, stream=True)
+        except requests.exceptions.ConnectionError:
+            print('Connection error. Retrying...')
+            sleep(61)
+
+            cls.extract(source, year, month)
+            return
 
         if response.status_code != requests.codes.ok:
-            print('Bad request.')
+            print('File does not exist. Thank you, next!')
             return
 
         os.makedirs(datapath, exist_ok=True)
