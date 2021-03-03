@@ -1,4 +1,5 @@
 from src.etl import ETL
+from time import sleep
 import itertools
 import fire
 
@@ -25,8 +26,8 @@ class Main:
                 series = itertools.product(self.YEARS, [''])
 
             for year, month in series:
-                print(f'Downloading {source} {year}{month}...')
                 ETL.extract(source, year, month)
+                sleep(1)
 
 
 if __name__ == '__main__':
