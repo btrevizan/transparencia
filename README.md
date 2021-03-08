@@ -15,7 +15,7 @@ $ pip install -r requirements.txt
 ## Extract
 Primeiro passo é extrair os dados do portal da transparência. 
 Esse método irá extrair todos os arquivos do portal, dada um fonte, entre os
-anos de 2015 e 2020. Nosso projeto irá processar as seguintes fontes:
+anos de 2015 e 2020 e salvará em `data/raw/<fonte>/`. Nosso projeto irá processar as seguintes fontes:
 - **cpgf**: cartões de pagamento do Governo Federal
 - **cpcc**: cartões de pagamento do Governo Federal - Compras Centralizadas
 - **despesas-execucao**: despesas públicas
@@ -32,3 +32,18 @@ Por exemplo:
 $ pyhton main.py extract "despesas-execucao"
 ```
 Ou não passar esse parâmetro para extrair os arquivos de todas as fontes.
+
+## Transform
+O processo de load descompacta os arquivos extraídos do portal, limpa o cabeçalho e une 
+todos os registros em um único arquivo localizado em `data/processed/<fonte>/`. 
+Esse processo irá criar ~23GB de dados. 
+
+Para tanto, basta executar:
+```{shell}
+$ pyhton main.py transform <source>
+```
+Por exemplo:
+```{shell}
+$ pyhton main.py transform "despesas-execucao"
+```
+Ou não passar esse parâmetro para transformar os arquivos de todas as fontes.

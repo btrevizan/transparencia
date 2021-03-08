@@ -1,3 +1,5 @@
 fire
 requests
 tqdm
+zipfile37
+unidecode

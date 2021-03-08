@@ -28,6 +28,19 @@ class Main:
             for year, month in series:
                 ETL.extract(source, year, month, replace)
 
+    def transform(self, source: str = 'all'):
+        """
+        Unzip the downloaded files and append data into a single file.
+        The resulting files are located in data/processed.
+
+        :param source: (str, default 'all') When all, extract files from all sources.
+        Possible values: cpgf, cpcc, despesas-execucao, licitacoes, compras, viagens (a)
+        """
+        sources = [source] if source != 'all' else self.SOURCES
+
+        for source in sources:
+            ETL.transform(source)
+
 
 if __name__ == '__main__':
     fire.Fire(Main)
