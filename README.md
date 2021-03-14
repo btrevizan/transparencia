@@ -25,11 +25,11 @@ anos de 2015 e 2020 e salvará em `data/raw/<fonte>/`. Nosso projeto irá proces
 
 Para extrair os arquivos, basta executar:
 ```{shell}
-$ pyhton main.py extract <source>
+$ pyhton -u main.py extract <source>
 ```
 Por exemplo:
 ```{shell}
-$ pyhton main.py extract "despesas-execucao"
+$ pyhton -u main.py extract "despesas-execucao"
 ```
 Ou não passar esse parâmetro para extrair os arquivos de todas as fontes.
 
@@ -40,10 +40,30 @@ Esse processo irá criar ~23GB de dados.
 
 Para tanto, basta executar:
 ```{shell}
-$ pyhton main.py transform <source>
+$ pyhton -u main.py transform <source>
 ```
 Por exemplo:
 ```{shell}
-$ pyhton main.py transform "despesas-execucao"
+$ pyhton -u main.py transform "despesas-execucao"
 ```
 Ou não passar esse parâmetro para transformar os arquivos de todas as fontes.
+
+## Load
+Esse processo insere os dados dos arquivos criados na etapa *transform* no banco de dados.
+Todos os campos são interpretados como texto para que possam ser processados futuramente.
+
+### Dependências
+O processo de *load* possui algumas dependências, são elas:
+- Banco de dados PostgreSQL instalado ou acessível remotamente
+- Base de dados já criada
+- Um usuário com privilégio de criar/excluir tabelas e schemas e inserir dados nas tabelas
+
+Para rodar o *load*, basta executar:
+```{shell}
+$ pyhton -u main.py load <host> <database> <username> <password> <source>
+```
+Onde, `host` é o endereço do banco de dados. 
+Se ele estiver localizado localmente, então `host = localhost`.
+Os demais campos são autodescritivos.
+
+Esse processo insere **~78 milhões** de linhas no banco de dados.

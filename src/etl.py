@@ -1,10 +1,13 @@
 from unidecode import unidecode
+from src.psql import PSQL
 from time import sleep
 from tqdm import tqdm
 from glob import glob
 import requests
+import pandas
 import sys
 import os
+import re
 
 if sys.version_info >= (3, 7):
     import zipfile
@@ -108,6 +111,56 @@ class ETL:
 
             os.system(f'rm *.csv')
             include_header = False
+
+    @classmethod
+    def load(cls, source: str, host: str, database: str, username: str, password: str):
+        print(f'Loading {source} into database...')
+
+        type_conversion = {'text': str, 'integer': int, 'real': float}
+        filepaths = glob(f'data/processed/{source}/*.csv')
+        chunk_size = 100000
+        metadata = {}
+
+        psql = PSQL(host, database, username, password)
+        psql.create_schema('spectrum')
+
+        for filepath in filepaths:
+            print(f'Processing {filepath}...', end=' ')
+
+            tbl_name = 'spectrum.' + filepath.split('/')[-1][:-4].lower().replace('-', '_')
+            psql.drop_table(tbl_name)
+
+            df = pandas.read_csv(filepath, sep=';', header=0, nrows=5, dtype=str)
+
+            cols = {}
+            for column in df.columns.values:
+                name = re.sub(r'_(\([^_.]*\)|-)', '', column).replace('/', '_')
+                cols[name] = 'real' if re.match(r'^[1-9][0-9]+,[0-9]+$', str(df[column][0])) else 'text'
+
+            psql.create_table(tbl_name, cols)
+            metadata[filepath] = {'tbl_name': tbl_name, 'cols': cols}
+
+            print('Done.')
+
+        for filepath in filepaths:
+            tbl_name = metadata[filepath]['tbl_name']
+            cols = metadata[filepath]['cols']
+            dtypes = {column: type_conversion[dtype] for column, dtype in cols.items()}
+
+            total = 0
+            with open(filepath, 'r') as file:
+                for _ in file:
+                    total += 1
+
+            print(tbl_name, total)
+
+            # df = pandas.read_csv(filepath, sep=';', header=0, chunksize=chunk_size, dtype=dtypes, decimal=',')
+            #
+            # for chunk in tqdm(df, total=total // chunk_size, desc=tbl_name, unit_scale=True, unit_divisor=chunk_size, unit='100.000 entries', miniters=1, leave=False):
+            #     values = [("('" + str(list([e.replace(',', ';') if type(e) is str else e for e in entry])).replace("'", '').replace(', ', "', '")[1:-1] + "')").replace("'nan'", "NULL") for entry in chunk.values]
+            #     psql.insert(tbl_name, list(cols.keys()), values)
+
+            # print(f'Added {total} entries into {tbl_name}.')
 
     @staticmethod
     def append(source, dest, header):

@@ -3,3 +3,5 @@ requests
 tqdm
 zipfile37
 unidecode
+psycopg2
+pandas

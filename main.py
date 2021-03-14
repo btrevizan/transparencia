@@ -41,6 +41,26 @@ class Main:
         for source in sources:
             ETL.transform(source)
 
+    def load(self, host, database, username, password, source: str = 'all'):
+        """
+        Load the processed files into the database.
+
+        :param host: (str) DB address.
+        :param database: (str) Database name.
+        :param username: (str) User with create/drop/insert table/schema privileges.
+        :param password: (str) User's password.
+        :param source: (str, default 'all') When all, extract files from all sources.
+        Possible values: cpgf, cpcc, despesas-execucao, licitacoes, compras, viagens (a)
+        """
+        # host = localhost
+        # database = transparencia
+        # username = python
+        # password = python
+        sources = [source] if source != 'all' else self.SOURCES
+
+        for source in sources:
+            ETL.load(source, host, database, username, password)
+
 
 if __name__ == '__main__':
     fire.Fire(Main)
