@@ -152,15 +152,13 @@ class ETL:
                 for _ in file:
                     total += 1
 
-            print(tbl_name, total)
+            df = pandas.read_csv(filepath, sep=';', header=0, chunksize=chunk_size, dtype=dtypes, decimal=',')
 
-            # df = pandas.read_csv(filepath, sep=';', header=0, chunksize=chunk_size, dtype=dtypes, decimal=',')
-            #
-            # for chunk in tqdm(df, total=total // chunk_size, desc=tbl_name, unit_scale=True, unit_divisor=chunk_size, unit='100.000 entries', miniters=1, leave=False):
-            #     values = [("('" + str(list([e.replace(',', ';') if type(e) is str else e for e in entry])).replace("'", '').replace(', ', "', '")[1:-1] + "')").replace("'nan'", "NULL") for entry in chunk.values]
-            #     psql.insert(tbl_name, list(cols.keys()), values)
+            for chunk in tqdm(df, total=total // chunk_size, desc=tbl_name, unit_scale=True, unit_divisor=chunk_size, unit='100.000 entries', miniters=1, leave=False):
+                values = [("('" + str(list([e.replace(',', ';') if type(e) is str else e for e in entry])).replace("'", '').replace(', ', "', '")[1:-1] + "')").replace("'nan'", "NULL") for entry in chunk.values]
+                psql.insert(tbl_name, list(cols.keys()), values)
 
-            # print(f'Added {total} entries into {tbl_name}.')
+            print(f'Added {total} entries into {tbl_name}.')
 
     @staticmethod
     def append(source, dest, header):
