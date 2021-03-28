@@ -5,9 +5,9 @@ import fire
 
 class Main:
 
-    YEARS = [2020, 2019, 2018, 2017, 2016, 2015]
+    YEARS = [2020, 2019, 2018, 2017, 2016, 2015, 2014]
     MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-    SOURCES = ['cpgf', 'cpcc', 'despesas-execucao', 'licitacoes', 'compras', 'viagens']
+    SOURCES = ['cpgf', 'despesas-execucao', 'licitacoes', 'compras', 'viagens']
 
     def extract(self, source: str = 'all', replace: bool = False):
         """
