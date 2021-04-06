@@ -67,3 +67,24 @@ Se ele estiver localizado localmente, então `host = localhost`.
 Os demais campos são autodescritivos.
 
 Esse processo insere **~78 milhões** de linhas no banco de dados.
+
+## Normalize
+Adicionamos mais uma etapa ao ETL, a normalização dos dados. Isto é, nessa etapa reduzimos
+a redundância dos dados ao criar relações entre as tabelas. Nós também filtramos alguns valores
+desnecessário para a análise. A etapa de normalização executa os comandos SQL disponíveis no
+diretório `sql`. Com o intuito de automatizar a criação e população das tabelas, criamos um 
+comando no mesmo formato dos demais:
+```{shell}
+$ pyhton -u main.py normalize <host> <database> <username> <password> <source>
+```
+
+### Modelo ER
+Após executar a normalização, essa é a representação entidade-relacionamento da base:
+
+![Modelo ER](support/modelo_er.png)
+
+# API
+Depois de executar todas as etapas do ETL, os dados estão prontos para serem analisados.
+Para tanto, iremos criar uma API com chamadas básicas que permita o usuário acessar os dados
+sem conectar no banco de dados, mas sim, apenas na API permitindo também que várias outras 
+aplicações sejam construídas a partir desta.

@@ -1,3 +1,4 @@
+from src.database import Database
 from src.etl import ETL
 import itertools
 import fire
@@ -7,7 +8,7 @@ class Main:
 
     YEARS = [2020, 2019, 2018, 2017, 2016, 2015, 2014]
     MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
-    SOURCES = ['cpgf', 'despesas-execucao', 'licitacoes', 'compras', 'viagens']
+    SOURCES = ['cpgf', 'despesas-execucao', 'licitacoes', 'viagens']
 
     def extract(self, source: str = 'all', replace: bool = False):
         """
@@ -60,6 +61,17 @@ class Main:
 
         for source in sources:
             ETL.load(source, host, database, username, password)
+
+    def normalize(self, host, database, username, password):
+        """
+        Execute SQL commands saved in "sql" folder for denormalization.
+
+        :param host: (str) DB address.
+        :param database: (str) Database name.
+        :param username: (str) User with create/drop/insert table/schema privileges.
+        :param password: (str) User's password.
+        """
+        Database(host, database, username, password).normalize()
 
 
 if __name__ == '__main__':
