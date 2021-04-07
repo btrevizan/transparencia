@@ -5,3 +5,4 @@ zipfile37
 unidecode
 psycopg2
 pandas
+flask
