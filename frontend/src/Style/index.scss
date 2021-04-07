@@ -1,0 +1,29 @@
+// change the theme
+$theme-colors: (
+
+);
+
+// Import Bootstrap and its default variables
+@import "~bootstrap/scss/bootstrap.scss";
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bungee&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --primary: #e6e6e6;
+  --primary-light: #95c623;
+  --primary-dark: #093a3e;
+  --primary-text: #212121;
+  --secondary: #23576C;
+  --secondary-light: #c2f970;
+  --secondary-dark: #07594a;
+  --background: #c1cad6;
+  --danger: #b05d5d;
+}
+
+/* 
+https://coolors.co/95c623-ff8c61-23576c-c1cad6-341c1c
+*/
+
+@import "AllPartials";
