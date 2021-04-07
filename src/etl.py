@@ -127,7 +127,7 @@ class ETL:
         for filepath in filepaths:
             print(f'Processing {filepath}...', end=' ')
 
-            tbl_name = 'spectrum.' + filepath.split('/')[-1][:-4].lower().replace('-', '_')
+            tbl_name = 'spectrum.' + filepath.split('/').split('\\')[-1][:-4].lower().replace('-', '_')
             psql.drop_table(tbl_name)
 
             df = pandas.read_csv(filepath, sep=';', header=0, nrows=5, dtype=str)
