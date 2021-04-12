@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-const HomePageWrapper = () => {
-//   const {
-//     Loading, AllFieldsMap
-//   } = components;
+const HomePageWrapper = ({ components }) => {
+  const {
+    Graph
+  } = components;
 //   const { getFields } = adsCentralStorageApiHandler;
 
   class HomePage extends Component {
@@ -35,7 +35,8 @@ const HomePageWrapper = () => {
           </div>
     
           <div className="right-sidebar mock-title">
-            GRÁFICOS
+            {/* GRÁFICOS */}
+            <Graph />
             {/* { isLoading ? <Loading text="Fetching Data" /> : "HELLO" } */}
           </div>
         </div>

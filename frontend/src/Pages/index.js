@@ -1,7 +1,7 @@
 import HomePageWrapper from './HomePage';
 
-const Pages = () => {
-    const HomePage = HomePageWrapper();
+const Pages = ({ components }) => {
+    const HomePage = HomePageWrapper({ components });
 
     return {
         HomePage
