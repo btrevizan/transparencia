@@ -1,6 +1,6 @@
-import React from 'react';
-import Spinner from 'react-bootstrap/Spinner';
-import PropTypes from 'prop-types';
+import React from "react";
+import Spinner from "react-bootstrap/Spinner";
+import PropTypes from "prop-types";
 
 const Loading = (props) => {
   const { text } = props;
@@ -18,7 +18,7 @@ Loading.propTypes = {
 };
 
 Loading.defaultProps = {
-  text: ''
+  text: ""
 };
 
 export default Loading;

@@ -1,5 +1,6 @@
-import Pages from './Pages';
-import Components from './Components';
+import React from "react";
+import Pages from "./Pages";
+import Components from "./Components";
 
 const App = () => {
   const components = Components();
@@ -12,6 +13,6 @@ const App = () => {
       <HomePage />
     </div>
   );
-}
+};
 
 export default App;

@@ -1,11 +1,11 @@
-import HomePageWrapper from './HomePage';
+import HomePageWrapper from "./HomePage";
 
 const Pages = ({ components }) => {
-    const HomePage = HomePageWrapper({ components });
+  const HomePage = HomePageWrapper({ components });
 
-    return {
-        HomePage
-    }
-}
+  return {
+    HomePage,
+  };
+};
 
 export default Pages;

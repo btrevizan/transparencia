@@ -1,12 +1,11 @@
-import React from 'react';
-import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
+import React from "react";
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from "victory";
 
 class Graph extends React.Component {
   constructor(props) {
     super(props);
-      this.state = {
-
-      }
+    this.state = {
+    };
   }
 
   
@@ -38,9 +37,8 @@ class Graph extends React.Component {
           y="earnings"
         />
       </VictoryChart>
-    )
+    );
   }
-
 }
 
 export default Graph;

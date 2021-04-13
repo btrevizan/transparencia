@@ -1,28 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 const HomePageWrapper = ({ components }) => {
-  const {
-    Graph
-  } = components;
-//   const { getFields } = adsCentralStorageApiHandler;
+  const { Graph, QueryForm } = components;
+  //   const { getFields } = adsCentralStorageApiHandler;
 
   class HomePage extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        isLoading: true
+        isLoading: true,
       };
     }
 
     componentDidMount() {
-    //   getFields(withShape)
-    //     .then((fields) => {
-    //       this.setState({ fields, isLoading: false });
-    //     })
-    //     .catch((error) => {
-    //       console.log(error.message);
-    //       this.setState({ isLoading: false });
-    //     });
+      //   getFields(withShape)
+      //     .then((fields) => {
+      //       this.setState({ fields, isLoading: false });
+      //     })
+      //     .catch((error) => {
+      //       console.log(error.message);
+      //       this.setState({ isLoading: false });
+      //     });
     }
 
     render() {
@@ -31,9 +29,10 @@ const HomePageWrapper = ({ components }) => {
       return (
         <div className="homepage container">
           <div className="left-sidebar mock-title">
-            PESQUISAS
+            PESQUISAR
+            <QueryForm />
           </div>
-    
+
           <div className="right-sidebar mock-title">
             {/* GRÁFICOS */}
             <Graph />
