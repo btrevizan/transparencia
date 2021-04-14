@@ -25,11 +25,11 @@ anos de 2015 e 2020 e salvará em `data/raw/<fonte>/`. Nosso projeto irá proces
 
 Para extrair os arquivos, basta executar:
 ```{shell}
-$ pyhton -u main.py extract <source>
+$ python -u main.py extract <source>
 ```
 Por exemplo:
 ```{shell}
-$ pyhton -u main.py extract "despesas-execucao"
+$ python -u main.py extract "despesas-execucao"
 ```
 Ou não passar esse parâmetro para extrair os arquivos de todas as fontes.
 
@@ -40,11 +40,11 @@ Esse processo irá criar ~23GB de dados.
 
 Para tanto, basta executar:
 ```{shell}
-$ pyhton -u main.py transform <source>
+$ python -u main.py transform <source>
 ```
 Por exemplo:
 ```{shell}
-$ pyhton -u main.py transform "despesas-execucao"
+$ python -u main.py transform "despesas-execucao"
 ```
 Ou não passar esse parâmetro para transformar os arquivos de todas as fontes.
 
@@ -60,7 +60,7 @@ O processo de *load* possui algumas dependências, são elas:
 
 Para rodar o *load*, basta executar:
 ```{shell}
-$ pyhton -u main.py load <host> <database> <username> <password> <source>
+$ python -u main.py load <host> <database> <username> <password> <source>
 ```
 Onde, `host` é o endereço do banco de dados. 
 Se ele estiver localizado localmente, então `host = localhost`.
@@ -75,7 +75,7 @@ desnecessário para a análise. A etapa de normalização executa os comandos SQ
 diretório `sql`. Com o intuito de automatizar a criação e população das tabelas, criamos um 
 comando no mesmo formato dos demais:
 ```{shell}
-$ pyhton -u main.py normalize <host> <database> <username> <password> <source>
+$ python -u main.py normalize <host> <database> <username> <password> <source>
 ```
 
 ### Modelo ER
@@ -88,3 +88,20 @@ Depois de executar todas as etapas do ETL, os dados estão prontos para serem an
 Para tanto, iremos criar uma API com chamadas básicas que permita o usuário acessar os dados
 sem conectar no banco de dados, mas sim, apenas na API permitindo também que várias outras 
 aplicações sejam construídas a partir desta.
+
+# Frontend
+Para rodar a interface de usuário é necessário primeiro acessar à pasta e instalar as dependências apenas na primeira vez:
+
+```{shell}
+$ cd frontend
+```
+
+```{shell}
+$ npm install
+```
+
+Feito isso o servidor pode ser executado com:
+
+```{shell}
+$ npm start
+```

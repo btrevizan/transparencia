@@ -1,0 +1,47 @@
+.query-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .btn {
+    margin-left: 0.5vw;
+  }
+
+  .form {
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    align-content: center;
+  }
+
+  .form-group {
+    height: auto;
+
+    .fields-select {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .query-form {
+      width: 70%;
+      margin: 0;
+      box-shadow: none;
+      flex-direction: column;
+
+      .form-fields {
+        width: 100%;
+      }
+    }
+  }
+
+  .form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    .btn {
+      margin: 1vw;
+    }
+  }
+}

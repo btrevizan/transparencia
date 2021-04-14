@@ -1,0 +1,13 @@
+.loading {
+    display: flex;
+    align-items: center;
+    align-self: center;
+    font-weight: 600;
+    font-size: large;
+    color: var(--primary-text);
+    > * {
+      margin-right: 1vh;
+    }
+    justify-content: center;
+  }
+  
