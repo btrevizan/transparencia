@@ -29,8 +29,8 @@ INSERT INTO gastos.Viagem
         DATE_PART('year', TO_DATE(periodo_data_de_inicio, 'YYYY/MM')) AS ano_transacao,
         DATE_PART('month', TO_DATE(periodo_data_de_inicio, 'YYYY/MM')) AS mes_transacao,
         valor_diarias AS valor_diarias,
-        REPLACE(valor_passagens, ';', '.')::DECIMAL AS valor_passagens,
-        REPLACE(valor_outros_gastos, ';', '.')::DECIMAL AS outros_gastos
+        REPLACE(valor_passagens::TEXT, ';', '.')::DECIMAL AS valor_passagens,
+        REPLACE(valor_outros_gastos::TEXT, ';', '.')::DECIMAL AS outros_gastos
     FROM spectrum.viagem AS viagem
     WHERE situacao = 'Realizada';
 
