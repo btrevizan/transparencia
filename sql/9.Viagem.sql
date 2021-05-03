@@ -26,8 +26,8 @@ INSERT INTO gastos.Viagem
         codigo_do_orgao_superior::integer,
         nome AS codigo_favorecido,
         viagem.motivo AS motivo,
-        DATE_PART('year', TO_DATE(periodo_data_de_inicio, 'YYYY/MM')) AS ano_transacao,
-        DATE_PART('month', TO_DATE(periodo_data_de_inicio, 'YYYY/MM')) AS mes_transacao,
+        DATE_PART('year', TO_DATE(periodo_data_de_inicio, 'DD/MM/YYYY')) AS ano_transacao,
+        DATE_PART('month', TO_DATE(periodo_data_de_inicio, 'DD/MM/YYYY')) AS mes_transacao,
         valor_diarias AS valor_diarias,
         REPLACE(valor_passagens::TEXT, ';', '.')::DECIMAL AS valor_passagens,
         REPLACE(valor_outros_gastos::TEXT, ';', '.')::DECIMAL AS outros_gastos
