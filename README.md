@@ -89,14 +89,25 @@ Para tanto, iremos criar uma API com chamadas básicas que permita o usuário ac
 sem conectar no banco de dados, mas sim, apenas na API permitindo também que várias outras 
 aplicações sejam construídas a partir desta.
 
+## Iniciar a API
+Para iniciar aplicação da API, basta executar na linha de comando:
+```{shell}
+$ export FLASK_APP=api/api.py
+$ flask run
+```
+
+## Chamada API
+A API possui apenas duas chamadas:
+
+- `http://127.0.0.1:5000` retorna `{"message": "API is working."}`
+- `http://127.0.0.1:5000/query/<query command>` retorna um JSON com o resultado da consulta 
+  como uma lista de registros. Exemplo: `{"result": [[2014, 2000000], [2015, 78033221], [2016, 34531210], ...]}`.
+
 # Frontend
 Para rodar a interface de usuário é necessário primeiro acessar à pasta e instalar as dependências apenas na primeira vez:
 
 ```{shell}
 $ cd frontend
-```
-
-```{shell}
 $ npm install
 ```
 
