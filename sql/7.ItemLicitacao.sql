@@ -23,14 +23,14 @@ CREATE TABLE gastos.ItemLicitacao (
 );
 
 INSERT INTO gastos.ItemLicitacao
-    SELECT
+    SELECT DISTINCT
         licitacao.codigo AS codigo_contrato,
         compra.nome_vencedor As codigo_favorecido,
         compra.descricao AS codigo_item,
         compra.quantidade_item::integer AS quantidade,
-        compra.valor_item AS valor_unitario
+        REPLACE(REPLACE(compra.valor_item::TEXT, ';', '.'), ',', '.')::DECIMAL AS valor_unitario
     FROM gastos.Licitacao AS licitacao
     LEFT JOIN spectrum.itemlicitacao AS compra ON (licitacao.codigo = CONCAT(compra.numero_licitacao, compra.numero_processo, compra.codigo_orgao, compra.codigo_ug, compra.codigo_modalidade_compra))
-    WHERE compra.valor_item > 0;
+    WHERE compra.quantidade_item::integer > 0;
 
 END;

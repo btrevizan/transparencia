@@ -21,7 +21,6 @@ INSERT INTO gastos.Licitacao
         DATE_PART('month', TO_DATE(data_resultado_compra, 'DD/MM/YYYY')) AS mes_transacao
     FROM spectrum.licitacao
     WHERE situacao_licitacao IN ('Publicado', 'Encerrado')
-    AND valor_licitacao > 0
     AND codigo_orgao IS NOT NULL;
 
 END;

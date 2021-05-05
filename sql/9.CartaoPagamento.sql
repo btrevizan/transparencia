@@ -31,7 +31,7 @@ INSERT INTO gastos.CartaoPagamento
         nome_favorecido AS codigo_favorecido,
         DATE_PART('year', TO_DATE(data_transacao, 'DD/MM/YYYY')) AS ano_transacao,
         DATE_PART('month', TO_DATE(data_transacao, 'DD/MM/YYYY')) AS mes_transacao,
-        valor_transacao::decimal,
+        REPLACE(REPLACE(valor_transacao::TEXT, ';', '.'), ',', '.')::DECIMAL AS valor_transacao,
         transacao AS tipo_operacao
     FROM spectrum.cpgf
     WHERE data_transacao IS NOT NULL;

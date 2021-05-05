@@ -23,7 +23,7 @@ CREATE OR REPLACE VIEW gastos.totais AS
 
              SELECT ano_transacao, mes_transacao,
                     orgao.nome AS orgao_responsavel,
-                    SUM(quantidade * valor_unitario) AS total
+                    SUM(valor_unitario) AS total
              FROM gastos.itemlicitacao AS item
              INNER JOIN gastos.licitacao AS lic ON (lic.codigo = item.codigo_licitacao)
              INNER JOIN gastos.orgaosuperior AS orgao ON (orgao.codigo = lic.codigo_orgao_superior)

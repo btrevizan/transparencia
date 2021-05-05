@@ -135,7 +135,7 @@ class ETL:
             cols = {}
             for column in df.columns.values:
                 name = re.sub(r'_(\([^_.]*\)|-)', '', column).replace('/', '_')
-                cols[name] = 'real' if re.match(r'^[1-9][0-9]+,[0-9]+$', str(df[column][0])) else 'text'
+                cols[name] = 'text'  # 'real' if re.match(r'^[1-9][0-9]+,[0-9]+$', str(df[column][0])) else 'text'
 
             psql.create_table(tbl_name, cols)
             metadata[filepath] = {'tbl_name': tbl_name, 'cols': cols}
@@ -152,7 +152,7 @@ class ETL:
                 for _ in file:
                     total += 1
 
-            df = pandas.read_csv(filepath, sep=';', header=0, chunksize=chunk_size, dtype=dtypes, decimal=',')
+            df = pandas.read_csv(filepath, sep=';', header=0, chunksize=chunk_size, dtype=dtypes)  # , decimal=',')
 
             for chunk in tqdm(df, total=total // chunk_size, desc=tbl_name, unit_scale=True, unit_divisor=chunk_size, unit='100.000 entries', miniters=1, leave=False):
                 values = [("('" + str(list([e.replace(',', ';') if type(e) is str else e for e in entry])).replace("'", '').replace(', ', "', '")[1:-1] + "')").replace("'nan'", "NULL") for entry in chunk.values]

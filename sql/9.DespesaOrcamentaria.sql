@@ -36,7 +36,7 @@ INSERT INTO gastos.DespesaOrcamentaria
         codigo_elemento_de_despesa::integer AS codigo_elemento,
         DATE_PART('year', TO_DATE(ano_e_mes_do_lancamento, 'YYYY/MM')) AS ano_transacao,
         DATE_PART('month', TO_DATE(ano_e_mes_do_lancamento, 'YYYY/MM')) AS mes_transacao,
-        valor_pago::decimal AS valor_transacao
+        REPLACE(REPLACE(valor_pago::TEXT, ';', '.'), ',', '.')::DECIMAL AS valor_transacao
     FROM spectrum.despesas_execucao
     WHERE ano_e_mes_do_lancamento IS NOT NULL;
 
