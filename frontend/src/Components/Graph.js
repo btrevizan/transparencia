@@ -9,6 +9,22 @@ import {
 } from "victory";
 import logo from "../Style/Icons/transparency-color.png";
 
+const colors = [
+  "#c2f970",
+  "#07594a",
+  "#212121",
+  "#FF8C61",
+  "#8D5A97",
+  "#BA1200",
+  "#F4AC32",
+];
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 const Graph = () => {
   const store = useStore();
   const storeResult = store.getState().result;
@@ -26,16 +42,55 @@ const Graph = () => {
   if (result) {
     return (
       <VictoryChart
-        // adding the material theme provided with Victory
-        theme={VictoryTheme.material}
-        domainPadding={20}
+      // adding the material theme provided with Victory
+      // theme={VictoryTheme.material}
+      // domainPadding={10}
       >
-        <VictoryAxis
+        <VictoryGroup
+          offset={20}
+          colorScale={colors}
+          // categories={["2014", "2015", "2016", "2017"]}
+        >
+          <VictoryBar
+            data={[
+              { x: "org1", y: 1, label: "2014" },
+              { x: "org2", y: 2, label: "2015" },
+              { x: "org3", y: 5, label: "2016" },
+            ]}
+          />
+          <VictoryBar
+            data={[
+              { x: "org1", y: 2, label: "2016" },
+              { x: "org3", y: 1, label: "2014" },
+              { x: "org2", y: 7, label: "2014" },
+            ]}
+          />
+          <VictoryBar
+            data={[
+              { x: "org1", y: 3, label: "2017" },
+              { x: "org3", y: 4, label: "2015" },
+              { x: "org2", y: 9, label: "2016" },
+            ]}
+          />
+        </VictoryGroup>
+        {/* <VictoryAxis
           tickValues={[1, 2, 3, 4]}
           tickFormat={["Quarter 1", "Quarter 2", "Quarter 3", "Quarter 4"]}
         />
         <VictoryAxis dependentAxis tickFormat={(x) => `$${x / 1000}k`} />
-        <VictoryBar data={result} x="quarter" y="earnings" />
+        <VictoryBar
+          animate={{
+            duration: 2000,
+            easing: "bounce",
+          }}
+          style={{
+            data: { fill: colors[getRandomInt(0, 6)], width: 25 },
+          }}
+          data={result}
+          x="quarter"
+          y="earnings"
+        />{" "}
+        */}
       </VictoryChart>
     );
   } else {
