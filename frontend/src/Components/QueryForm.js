@@ -2,18 +2,18 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
+import queries from "../Constants/queries";
 // import { toast } from 'react-toastify';
 // import PropTypes from 'prop-types';
 
-const QueryFormWrapper = () => {
-  // const { patchFieldName, putFieldShape } = SQLApiHandler;
-
+const QueryFormWrapper = ({ sqlApiHandler }) => {
+  // const { getQueryResult } = sqlApiHandler;
   class QueryForm extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
         isLoading: false,
-        isFieldInvalid: false,
+        query: null,
       };
     }
 
@@ -29,27 +29,20 @@ const QueryFormWrapper = () => {
     }
 
     handleInfoSubmit = () => {
-      console.log("SUBMIT");
-      // const { fieldName } = this.state;
-      // const { fieldId } = this.props.fieldInfo;
-
+      // const { query } = this.state;
+      // console.log("SUBMIT", query);
       // this.setState({ isLoading: true });
-
-      // if (this.isEmptyString(fieldName)) {
-      //   this.setState({ isFieldNameInvalid: true, isLoading: false });
-      // } else {
       //   this.setState({ isFieldNameInvalid: false });
-      //   patchFieldName(fieldId, fieldName)
+      //   getQueryResult(query)
       //     .then(() => {
-      //       this.setState({ isLoading: false, isInfoEditMode: false });
-      //       // toast.success('Saved Field Information Successfully');
+      //       this.setState({ isLoading: false });
+      //       // toast.success('Success');
       //     })
       //     .catch((err) => {
       //       console.log(err.message);
-      //       // toast.error('Unable to Save Field Information');
+      //       // toast.error('Unable to get result');
       //       this.setState({ isLoading: false });
       //     });
-      // }
     };
 
     isEmptyString(string) {
@@ -62,11 +55,11 @@ const QueryFormWrapper = () => {
 
     render() {
       const { isLoading } = this.state;
-      const data = ["item1", "item2", "item3", "item4", "item5"];
+
       return (
         <div className="query-form">
           <Form noValidate className="form">
-            <Form.Group controlId="fields-select" className="fields-select">
+            <Form.Group controlId="query-select" className="query-select">
               <div
                 style={{
                   display: "flex",
@@ -74,76 +67,25 @@ const QueryFormWrapper = () => {
                   width: "100%",
                 }}
               >
-                <Form.Label>Field 1</Form.Label>
+                <Form.Label>Consultas</Form.Label>
                 <Form.Control
                   as="select"
+                  size="lg"
                   custom
                   type="text"
-                  name="fieldName-input"
-                  onChange={(e) => this.setState({ field1: e.target.value })}
+                  name="query-input"
+                  defaultValue="Escolha..."
+                  onChange={(e) => this.setState({ query: e.target.value })}
                   readOnly={false}
-                  isInvalid={false}
                   required
                 >
-                  {data.map((field, index) => (
-                    <option key={index}> {field} </option>
+                  <option> Escolha... </option>
+                  {queries.map(({ query, id }) => (
+                    <option value={id} key={id}>
+                      {query}
+                    </option>
                   ))}
                 </Form.Control>
-                <Form.Control.Feedback name="field1Feedback" type="invalid">
-                  Please provide an item.
-                </Form.Control.Feedback>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100%",
-                }}
-              >
-                <Form.Label>Field 2</Form.Label>
-                <Form.Control
-                  as="select"
-                  custom
-                  type="text"
-                  name="fieldName-input"
-                  onChange={(e) => this.setState({ field2: e.target.value })}
-                  readOnly={false}
-                  isInvalid={false}
-                  required
-                >
-                  {data.map((field, index) => (
-                    <option key={index}> {field} </option>
-                  ))}
-                </Form.Control>
-                <Form.Control.Feedback name="field2Feedback" type="invalid">
-                  Please provide an item.
-                </Form.Control.Feedback>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "100%",
-                }}
-              >
-                <Form.Label>Field 3</Form.Label>
-                <Form.Control
-                  as="select"
-                  custom
-                  type="text"
-                  name="fieldName-input"
-                  onChange={(e) => this.setState({ field3: e.target.value })}
-                  readOnly={false}
-                  isInvalid={false}
-                  required
-                >
-                  {data.map((field, index) => (
-                    <option key={index}> {field} </option>
-                  ))}
-                </Form.Control>
-                <Form.Control.Feedback name="field3Feedback" type="invalid">
-                  Please provide an item.
-                </Form.Control.Feedback>
               </div>
             </Form.Group>
             <div className="query-buttons">

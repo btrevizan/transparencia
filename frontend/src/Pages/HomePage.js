@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 const HomePageWrapper = ({ components }) => {
   const { Graph, QueryForm } = components;
-  //   const { getFields } = adsCentralStorageApiHandler;
 
   class HomePage extends Component {
     constructor(props) {
@@ -12,28 +11,18 @@ const HomePageWrapper = ({ components }) => {
       };
     }
 
-    componentDidMount() {
-      //   getFields(withShape)
-      //     .then((fields) => {
-      //       this.setState({ fields, isLoading: false });
-      //     })
-      //     .catch((error) => {
-      //       console.log(error.message);
-      //       this.setState({ isLoading: false });
-      //     });
-    }
-
     render() {
       // const { isLoading } = this.state;
 
       return (
         <div className="homepage container">
           <div className="left-sidebar mock-title">
-            PESQUISAR
+            <span className="title">PESQUISAR</span>
             <QueryForm />
           </div>
 
           <div className="right-sidebar mock-title">
+            <span className="title">VISUALIZAR</span>
             {/* GRÁFICOS */}
             <Graph />
             {/* { isLoading ? <Loading text="Fetching Data" /> : "HELLO" } */}
