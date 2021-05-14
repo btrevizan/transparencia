@@ -100,8 +100,8 @@ $ flask run
 A API possui apenas duas chamadas:
 
 - `http://127.0.0.1:5000` retorna `{"message": "API is working."}`
-- `http://127.0.0.1:5000/query/<query command>` retorna um JSON com o resultado da consulta 
-  como uma lista de registros. Exemplo: `{"result": [[2014, 2000000], [2015, 78033221], [2016, 34531210], ...]}`.
+- `http://127.0.0.1:5000/query<n>` retorna um JSON com o resultado da consulta `n` como uma lista de registros. 
+  Exemplo: `{"result": [{x: 2014, y: 2000000}, {x: 2015, y: 78033221}, {x: 2016, y: 34531210}, ...]}`.
 
 # Frontend
 Para rodar a interface de usuário é necessário primeiro acessar à pasta e instalar as dependências apenas na primeira vez:
