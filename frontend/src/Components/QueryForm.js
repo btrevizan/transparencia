@@ -3,11 +3,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import queries from "../Constants/queries";
-// import { toast } from 'react-toastify';
-// import PropTypes from 'prop-types';
 
 const QueryFormWrapper = ({ sqlApiHandler }) => {
-  // const { getQueryResult } = sqlApiHandler;
+  const { getQueryResult } = sqlApiHandler;
   class QueryForm extends React.Component {
     constructor(props) {
       super(props);
@@ -17,37 +15,19 @@ const QueryFormWrapper = ({ sqlApiHandler }) => {
       };
     }
 
-    componentDidUpdate() {
-      // const apiFieldName = this.props.fieldInfo.name;
-      // To ensure the field name input renders always with the api data
-      // if (this.isEmptyString(fieldName)
-      //   && !isInfoEditMode
-      //   && !this.isEmptyString(apiFieldName)) {
-      //   // eslint-disable-next-line react/no-did-update-set-state
-      //   this.setState({ fieldName: apiFieldName });
-      // }
-    }
-
     handleInfoSubmit = () => {
-      // const { query } = this.state;
-      // console.log("SUBMIT", query);
-      // this.setState({ isLoading: true });
-      //   this.setState({ isFieldNameInvalid: false });
-      //   getQueryResult(query)
-      //     .then(() => {
-      //       this.setState({ isLoading: false });
-      //       // toast.success('Success');
-      //     })
-      //     .catch((err) => {
-      //       console.log(err.message);
-      //       // toast.error('Unable to get result');
-      //       this.setState({ isLoading: false });
-      //     });
+      const { query } = this.state;
+      console.log("REQUEST: ", query);
+      this.setState({ isLoading: true });
+      getQueryResult(query)
+        .then(() => {
+          this.setState({ isLoading: false });
+        })
+        .catch((err) => {
+          console.log(err.message);
+          this.setState({ isLoading: false });
+        });
     };
-
-    isEmptyString(string) {
-      return !string.replace(/\s/g, "").length;
-    }
 
     displayElementIf(condition) {
       return condition ? {} : { display: "none" };
@@ -70,7 +50,6 @@ const QueryFormWrapper = ({ sqlApiHandler }) => {
                 <Form.Label>Consultas</Form.Label>
                 <Form.Control
                   as="select"
-                  size="lg"
                   custom
                   type="text"
                   name="query-input"
@@ -89,23 +68,11 @@ const QueryFormWrapper = ({ sqlApiHandler }) => {
               </div>
             </Form.Group>
             <div className="query-buttons">
-              {/* <Button
-                variant="primary-dark"
-                className="editInfoBtn"
-                size="sm"
-                type="button"
-                onClick={() => this.setState({ isInfoEditMode: true })}
-                style={this.displayElementIf(!isInfoEditMode)}
-              >
-                Edit Information
-              </Button> */}
               <Button
-                // variant="secondary-light"
                 className="saveInfoBtn"
                 size="sm"
                 type="button"
                 onClick={this.handleInfoSubmit}
-                // style={this.displayElementIf(isInfoEditMode)}
               >
                 <span
                   className="saveBtn-span"
@@ -129,16 +96,6 @@ const QueryFormWrapper = ({ sqlApiHandler }) => {
       );
     }
   }
-
-  // QueryForm.propTypes = {
-  //   fieldShape: PropTypes.shape({
-  //     polygons: PropTypes.array
-  //   }).isRequired,
-  //   fieldInfo: PropTypes.shape({
-  //     fieldId: PropTypes.string,
-  //     name: PropTypes.string
-  //   }).isRequired
-  // };
 
   return QueryForm;
 };

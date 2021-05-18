@@ -3,8 +3,6 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-  console.log("HELLO", action);
-
   const { type, payload } = action;
   switch (type) {
     case "RESULT_LOADED":

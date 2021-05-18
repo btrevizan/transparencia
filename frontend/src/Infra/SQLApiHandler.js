@@ -5,25 +5,19 @@ const SQLApiHandler = ({ engine }) => {
     store: { dispatch },
     actions: { resultLoaded },
   } = engine;
-  //   const buildOptions = (headerOptions = null) => {
-  //     return {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         ...headerOptions
-  //       }
-  //     };
-  //   };
 
-  //   const getQueryResult = (query) => {
-  //     const url = `${BaseUrl}/query`;
-  //     return axios
-  //       .get(url, buildOptions())
-  //       .then((res) => dispatch(resultLoaded(res.data)));
-  //   };
+  const BaseUrl = "http://127.0.0.1:5000";
+  const getQueryResult = (query) => {
+    const url = `${BaseUrl}/${query}`;
+    return axios.get(url).then((res) => {
+      console.log("res: ", res);
+      dispatch(resultLoaded(res.data.result));
+    });
+  };
 
-  //   return {
-  //     getQueryResult,
-  //   };
+  return {
+    getQueryResult,
+  };
 };
 
 export default SQLApiHandler;
