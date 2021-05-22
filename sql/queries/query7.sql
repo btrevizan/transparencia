@@ -4,4 +4,5 @@ FROM gastos.licitacao l
 JOIN gastos.itemlicitacao il ON l.codigo = il.codigo_licitacao
 JOIN gastos.orgaosuperior os ON l.codigo_orgao_superior = os.codigo
 GROUP BY os.nome
-ORDER BY total desc;
+ORDER BY total desc
+LIMIT 10;

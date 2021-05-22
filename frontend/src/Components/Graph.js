@@ -131,7 +131,7 @@ const exampleVictoryGroupChart = () => (
 );
 
 const AxisGraph = (result) => {
-  const labelOnTop = result.length > 10;
+  const labelOnTop = result[0].x.length > 4 || result.length > 11;
 
   return (
     <VictoryChart
