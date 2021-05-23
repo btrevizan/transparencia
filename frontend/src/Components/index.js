@@ -3,15 +3,14 @@ import Header from "./Header";
 import Graph from "./Graph";
 import QueryFormWrapper from "./QueryForm";
 
-const Components = () => {
-
-  const QueryForm = QueryFormWrapper();
+const Components = ({ sqlApiHandler }) => {
+  const QueryForm = QueryFormWrapper({ sqlApiHandler });
 
   return {
     Loading,
     Header,
     Graph,
-    QueryForm
+    QueryForm,
   };
 };
 
