@@ -21,49 +21,40 @@ const queries = [
     id: "query9",
   },
   {
-    query:
-      "Ranking das viagens mais caras agrupadas por ano e órgão responsável",
-    id: "query10",
-  },
-  {
-    query: "Média dos valores das diárias em viagens agrupado por ano",
+    query: "Ranking das viagens mais caras agrupadas por órgão responsável",
     id: "query11",
   },
   {
-    query:
-      "Ranking dos itens mais comuns comprados em licitações agrupado por órgão responsável",
+    query: "Média dos valores das diárias em viagens agrupado por ano",
     id: "query12",
   },
   {
-    query:
-      "Ranking dos favorecidos nas compras por cartão de pagamento agrupado por ano e por tipo de aquisição",
+    query: "Ranking dos itens mais comuns comprados em licitações",
     id: "query13",
   },
   {
-    query: "Ranking das funções (Ministérios) com maior número de gastos",
+    query: "Ranking dos favorecidos nas compras por cartão de pagamento",
     id: "query14",
   },
   {
-    query:
-      "Ranking de favorecidos do portador com mais gastos no cartão de pagamento agrupado por tipo da transação.",
+    query: "Ranking das funções (Ministérios) com maior número de gastos",
     id: "query15",
+  },
+  {
+    query: "Ranking de portadores com mais gastos no cartao de pagamento",
+    id: "query16",
   },
   {
     query:
       "Funções de orçamentaria com maiores gastos agrupados por órgao responsável",
-    id: "query16",
-  },
-  {
-    query: "Funções de orçamentaria com maiores gastos agrupados por ano",
     id: "query17",
   },
   {
-    query:
-      "Subfunções de orçamentaria com maiores gastos agrupados por órgao responsável",
+    query: "Funções de orçamentaria com maiores gastos médios anuais",
     id: "query18",
   },
   {
-    query: "Subfunções de orçamentaria com maiores gastos agrupados por ano",
+    query: "Subfunções de orçamentaria com maiores gastos médios anuais",
     id: "query19",
   },
 ];
